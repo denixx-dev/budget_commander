@@ -7,11 +7,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
+import static org.hamcrest.Matchers.is;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,33 +32,30 @@ class BudgetCommanderApplicationTests  {
 
 	@Test
 	void testLoginWithExistingData_1() throws Exception {
-		byte[] jsonBytes = Files.readAllBytes(Paths.get("src/main/resources/static/Billy.json"));
-		MockMultipartFile file = new MockMultipartFile(
-				"file", "Billy.json", MediaType.APPLICATION_JSON_VALUE, jsonBytes);
-		mockMvc.perform(MockMvcRequestBuilders.multipart("/auth/login")
-				.file(file)
-						.contentType(MediaType.MULTIPART_FORM_DATA))
-				.andExpect(status().isOk());
+		String jsonContent = "{\n" +
+				"  \"username\": \"Billy\",\n" +
+				"  \"password\": \"123\"\n" +
+				"}";
+
+		mockMvc.perform(MockMvcRequestBuilders.post("/auth/login")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonContent))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.user.userId").exists());
 	}
 
 	@Test
 	void testLoginWithNonExistingData_1() throws Exception {
-		byte[] jsonBytes = Files.readAllBytes(Paths.get("src/main/resources/static/Billy.json"));
-
-		String expectedJson = "{\n" +
-				"    \"user\": null,\n" +
-				"    \"jwt\": \"\"\n" +
+		String jsonContent = "{\n" +
+				"  \"username\": \"John\",\n" +
+				"  \"password\": \"123\"\n" +
 				"}";
 
-		MockMultipartFile file = new MockMultipartFile(
-				"file", "John.json", MediaType.APPLICATION_JSON_VALUE, jsonBytes);
-		mockMvc.perform(MockMvcRequestBuilders.multipart("/auth/login")
-						.file(file)
-						.contentType(MediaType.MULTIPART_FORM_DATA))
-				.andExpectAll(
-						status().isOk(),
-						content().string(expectedJson)
-				);
+		mockMvc.perform(MockMvcRequestBuilders.post("/auth/login")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(jsonContent))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.jwt",  is("")));
 	}
 
 }
