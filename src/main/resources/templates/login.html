@@ -10,7 +10,8 @@
             Invalid username and password.</div>
         <div th:if="${param.logout}">
             You have been logged out.</div>
-        <form th:action="@{/auth/login}" method="post">
+        <form id="loginForm" method="post">
+
             <div>
                 <input type="text" name="username" placeholder="Username"/>
             </div>
@@ -19,4 +20,35 @@
             </div>
             <input type="submit" value="Log in" />
         </form>
+
+        <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const jsonData = {};
+            formData.forEach((value, key) => { jsonData[key] = value });
+
+            fetch('/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Обработка успешного ответа
+            })
+            .catch(error => {
+                console.error('Error:', error); // Обработка ошибки
+            });
+        });
+    </script>
     </body>
+</html>
