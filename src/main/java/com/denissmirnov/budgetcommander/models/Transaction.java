@@ -73,6 +73,30 @@ public class Transaction {
         return contragent;
     }
 
+    public Transaction(Integer t_id,
+                       ApplicationUser bc_user,
+                       Date transactionDate,
+                       String accountBank,
+                       String contragent,
+                       String transactionType,
+                       String transactionGroup,
+                       String project,
+                       String commentary,
+                       Long amount,
+                       String status) {
+        this.t_id = t_id;
+        this.bc_user = bc_user;
+        this.transactionDate = transactionDate;
+        this.accountBank = accountBank;
+        this.contragent = contragent;
+        this.transactionType = transactionType;
+        this.transactionGroup = transactionGroup;
+        this.project = project;
+        this.commentary = commentary;
+        this.amount = amount;
+        this.status = status;
+    }
+
     public void setContragent(String contragent) {
         this.contragent = contragent;
     }

@@ -20,8 +20,7 @@
             </div>
             <input type="submit" value="Log in" />
         </form>
-
-        <script>
+    <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -44,6 +43,7 @@
             })
             .then(data => {
                 console.log(data); // Обработка успешного ответа
+                window.location.href = '/auth/userData';
             })
             .catch(error => {
                 console.error('Error:', error); // Обработка ошибки

@@ -47,7 +47,7 @@ class BudgetCommanderApplicationTests  {
 	@Test
 	void testLoginWithNonExistingData_1() throws Exception {
 		String jsonContent = "{\n" +
-				"  \"username\": \"John\",\n" +
+				"  \"username\": \"Denis\",\n" +
 				"  \"password\": \"123\"\n" +
 				"}";
 
