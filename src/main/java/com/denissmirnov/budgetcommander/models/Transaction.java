@@ -8,9 +8,9 @@ import java.util.Date;
 @Table(name="transactions")
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "t_id")
-    private Integer t_id;
+    private Integer tId;
 
     @ManyToOne
     private ApplicationUser bc_user;
@@ -37,12 +37,12 @@ public class Transaction {
 
     private String status;
 
-    public Integer getT_id() {
-        return t_id;
+    public Integer getTid() {
+        return tId;
     }
 
-    public void setT_id(Integer t_id) {
-        this.t_id = t_id;
+    public void setTid(Integer t_id) {
+        this.tId = t_id;
     }
 
     public ApplicationUser getBc_user() {
@@ -84,7 +84,7 @@ public class Transaction {
                        String commentary,
                        Long amount,
                        String status) {
-        this.t_id = t_id;
+        this.tId = t_id;
         this.bc_user = bc_user;
         this.transactionDate = transactionDate;
         this.accountBank = accountBank;
@@ -95,6 +95,10 @@ public class Transaction {
         this.commentary = commentary;
         this.amount = amount;
         this.status = status;
+    }
+
+    public Transaction(){
+
     }
 
     public void setContragent(String contragent) {

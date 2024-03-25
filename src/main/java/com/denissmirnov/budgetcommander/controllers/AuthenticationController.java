@@ -33,15 +33,5 @@ public class AuthenticationController {
         return response;
     }
 
-//    @PostMapping
-//    public String showUserData(){
-//        if (username != null) {
-//            System.out.println("should show userData page");
-//            return "redirect:/userData"; // Перенаправление на страницу с данными пользователя
-//        } else {
-//            System.out.println("shouldn't show userData page");
-//            return "redirect:/login"; // Перенаправление на страницу входа при неудачной аутентификации
-//        }
-//    }
 
 }

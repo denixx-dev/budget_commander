@@ -7,5 +7,31 @@
     <body>
         <h1>User Data</h1>
         <p>Welcome, <span th:text="${session.username}"></span></p>
+
+        <table>
+            <tr>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Account Bank</th>
+                <th>Contragent</th>
+                <th>Transaction type</th>
+                <th>Transaction group</th>
+                <th>Project</th>
+                <th>Commentary</th>
+                <th>Status</th>
+            </tr>
+            <tr th:each="transaction : ${transactions}">
+                <td th:text="${transaction.amount}"></td>
+                <td th:text="${transaction.transactionDate}"></td>
+                <td th:text="${transaction.accountBank}"></td>
+                <td th:text="${transaction.contragent}"></td>
+                <td th:text="${transaction.transactionType}"></td>
+                <td th:text="${transaction.transactionGroup}"></td>
+                <td th:text="${transaction.project}"></td>
+                <td th:text="${transaction.commentary}"></td>
+                <td th:text="${transaction.status}"></td>
+            </tr>
+        </table>
+
     </body>
 </html>
