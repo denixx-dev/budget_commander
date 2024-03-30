@@ -33,5 +33,24 @@
             </tr>
         </table>
 
+        <br>
+        <h3>Add new transaction</h3>
+        <form id = "newTransactionForm" action = "/auth/userData" method = "post">
+            <input type = "hidden" name = "bc_user" value = "${userId}"/>
+            <input type="text" name="amount" placeholder="Amount"/>
+            <input type="text" name="transactionDate" placeholder="Transaction Date"/>
+            <input type="text" name="accountBank" placeholder="Account Bank"/>
+            <input type="text" name="contragent" placeholder="Contragent"/>
+            <input type="text" name="transactionType" placeholder="Transaction Type"/>
+            <input type="text" name="transactionGroup" placeholder="Transaction Group"/>
+            <input type="text" name="project" placeholder="Project"/>
+            <input type="text" name="commentary" placeholder="Commentary"/>
+            <input type="text" name="status" placeholder="Status"/>
+            <br>
+            <br>
+            <input type="submit" value="Add new transaction" />
+        </form>
+
+
     </body>
 </html>

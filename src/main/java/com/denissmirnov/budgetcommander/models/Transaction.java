@@ -96,6 +96,27 @@ public class Transaction {
         this.amount = amount;
         this.status = status;
     }
+    public Transaction(ApplicationUser bc_user,
+                       Date transactionDate,
+                       String accountBank,
+                       String contragent,
+                       String transactionType,
+                       String transactionGroup,
+                       String project,
+                       String commentary,
+                       Long amount,
+                       String status) {
+        this.bc_user = bc_user;
+        this.transactionDate = transactionDate;
+        this.accountBank = accountBank;
+        this.contragent = contragent;
+        this.transactionType = transactionType;
+        this.transactionGroup = transactionGroup;
+        this.project = project;
+        this.commentary = commentary;
+        this.amount = amount;
+        this.status = status;
+    }
 
     public Transaction(){
 

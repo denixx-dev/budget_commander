@@ -11,10 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -28,6 +27,8 @@ public class UserDataController {
     @Autowired
     TransactionRepository transactionRepository;
 
+    private Integer userId;
+
     @GetMapping
     public String showUserDataPage(HttpSession session, Model model){
         String username = (String) session.getAttribute("username");
@@ -37,7 +38,7 @@ public class UserDataController {
         ApplicationUser user = bcUserRepository.findByUsername(username);
         System.out.println("Passed getting user");
 
-        Integer userId = user.getUserId();;
+        this.userId = user.getUserId();
         System.out.println("Passed getting user id");
         System.out.println(userId);
 
