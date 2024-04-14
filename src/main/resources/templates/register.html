@@ -4,16 +4,53 @@
 <head>
     <title>Register in Budget Commander</title>
 </head>
-    <body>
-        <h1>Please Register</h1>
-        <form id="registerForm" method="post">
+    <body style="background: #76b852;
+        background: rgb(141,194,111);
+        background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Montserrat', sans-serif;
+        height: 100vh;
+        margin: -20px 0 50px;"
+    >
+        <h1>Please Register in Budget Commander</h1>
+        <form id="registerForm" method="post" style=
+                "position: relative;
+                  z-index: 1;
+                  background: #FFFFFF;
+                  max-width: 360px;
+                  margin: 0 auto 100px;
+                  padding: 45px;
+                  text-align: center;
+                  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);">
             <div>
                 <input type="text" name="username" placeholder="Username"/>
             </div>
             <div>
                 <input type="password" name="password" placeholder="Password"/>
             </div>
-            <input type="submit" value="Register" />
+            <input type="submit" value="Register" style = "font-family: Roboto, sans-serif;
+                text-transform: uppercase;
+                outline: 0;
+                background: #4CAF50;
+                width: 73%;
+                border: 0;
+                padding: 15px;
+                color: #FFFFFF;
+                font-size: 14px;
+                -webkit-transition: all 0.3 ease;
+                transition: all 0.3 ease;
+                cursor: pointer;
+                margin: 10px;
+                "/>
+            <br>
+            <br>
+            <div>
+                Already have an account?
+                <a href="/auth/login"> Log in</a>
+            </div>
         </form>
 
         <script>

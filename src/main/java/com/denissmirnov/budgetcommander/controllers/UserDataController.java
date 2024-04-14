@@ -46,7 +46,10 @@ public class UserDataController {
         System.out.println("Passed getting transactions");
 
         model.addAttribute("userId", userId);
+        System.out.println(userId);
         model.addAttribute("transactions", transactions);
+
+//        System.out.println("findByUserId method check " + bcUserRepository.findByUserId(this.userId).getUsername());
 
         return "userData";
     }

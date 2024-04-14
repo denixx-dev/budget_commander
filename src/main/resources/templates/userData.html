@@ -3,13 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <title>User Data</title>
-</head>
-    <body>
-        <h1>User Data</h1>
-        <p>Welcome, <span th:text="${session.username}"></span></p>
+    <script
+        src="http://localhost:35729/livereload.js">
+    </script>
+    <style>
+        #addTransaction {
+            font-family: Roboto, sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #4CAF50;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+            margin: 0 auto;
+            box-shadow: 1px 1px 2px black;
+<!--            text-align: left;-->
+        }
 
+        #deleteTransaction {
+            font-family: Roboto, sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #4CAF50;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+            margin: 0 auto;
+            box-shadow: 1px 1px 2px black;
+            right: 20px
+<!--            text-align: right;-->
+        }
+
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button {
+            flex: 1;
+            margin-right: 100px;
+        }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 0 auto;
+
+    }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+
+      }
+      thead {
+        background-color: #1c87c9;
+
+      }
+      th {
+        text-align: center;
+        height: 50px;
+        background: #4CAF50;
+      }
+      tbody tr:nth-child(odd) {
+        margin-left: auto;
+        margin-right: auto;
+        background: #f4f4f4;
+      }
+      tbody tr:nth-child(even) {
+        background: #f4f4f4;
+      }
+
+    </style>
+</head>
+    <body style="background: #76b852;
+        background: rgb(141,194,111);
+        background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+        display: flex;
+<!--        justify-content: center;-->
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Montserrat', sans-serif;
+        height: 150vh;
+        margin: 10px;
+        text-shadow: 1px 1px 2px black;">
+        <br>
+        <br>
+        <p style = "color: #FFFFFF; margin: 0 auto; font-size: 60px;">Welcome, <span th:text="${session.username}"></span></p>
+        <br>
+        <br>
         <table>
-            <tr>
+            <tr style = "color: #FFFFFF">
                 <th>Amount</th>
                 <th>Date</th>
                 <th>Account Bank</th>
@@ -20,7 +115,7 @@
                 <th>Commentary</th>
                 <th>Status</th>
             </tr>
-            <tr th:each="transaction : ${transactions}">
+            <tr th:each="transaction : ${transactions}" style="text-shadow: 0px 0px 0px black;">
                 <td th:text="${transaction.amount}"></td>
                 <td th:text="${transaction.transactionDate}"></td>
                 <td th:text="${transaction.accountBank}"></td>
@@ -34,9 +129,11 @@
         </table>
 
         <br>
-        <h3>Add new transaction</h3>
-        <form id = "newTransactionForm" action = "/auth/userData" method = "post">
-            <input type = "hidden" name = "bc_user" value = "${userId}"/>
+        <br>
+        <br>
+        <h3 style = "color: #FFFFFF; margin: 0 auto">Add new transaction</h3>
+        <form id = "newTransactionForm" action = "/auth/userData" method = "post" style="margin: 0 auto">
+            <input type="hidden" name = "bc_user" th:value="${userId}"/>
             <input type="text" name="amount" placeholder="Amount"/>
             <input type="text" name="transactionDate" placeholder="Transaction Date"/>
             <input type="text" name="accountBank" placeholder="Account Bank"/>
@@ -48,9 +145,22 @@
             <input type="text" name="status" placeholder="Status"/>
             <br>
             <br>
-            <input type="submit" value="Add new transaction" />
+            <div class="button-container">
+                <ul style="list-style-type: none">
+                    <li>
+                        <button id="addTransaction" type="submit" class="button button-left">
+                            Add new transaction
+                        </button>
+                    </li>
+                </ul>
+                <ul style="list-style-type: none">
+                    <li>
+                        <button id="deleteTransaction" type="reset" class="button button-right">
+                            Delete last transaction
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </form>
-
-
     </body>
 </html>
