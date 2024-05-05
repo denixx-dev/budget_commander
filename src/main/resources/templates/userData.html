@@ -2,10 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
     <title>User Data</title>
     <script
         src="http://localhost:35729/livereload.js">
     </script>
+
+
     <style>
         #addTransaction {
             font-family: Roboto, sans-serif;
@@ -85,6 +90,14 @@
         background: #f4f4f4;
       }
 
+      #chart_div {
+        width: 900px;
+        height: 500px;
+        text-shadow: 0px 0px 0px;
+        display: block;
+        margin: 0 auto;
+      }
+
     </style>
 </head>
     <body style="background: #76b852;
@@ -162,5 +175,78 @@
                 </ul>
             </div>
         </form>
+
+        <div class="container">
+            <h2 align="center" style = "color: #FFFFFF; margin: 0 auto; font-size: 40px;">Chart of transaction amounts by date</h2>
+            <br>
+            <br>
+            <div id="container"
+                 style="width: 1000px; height: 800px; margin: 0 auto; text-shadow: 0px 0px 0px"></div>
+        </div>
+        <script
+                src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script th:inline="javascript">
+            $(function(){
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column',
+                    backgroundColor: '#f4f4f4'
+                },
+                xAxis: {
+                    categories: [[${labels}]],
+                    crosshair: false,
+                    labels: {
+                        style: {
+                            fontSize: '15px' // измените размер текста на 16 пикселей
+                        }
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                yAxis: {
+                    min: 0,
+                    max:1e6 / 2,
+                    title: {
+                        text: 'Amounts',
+                        style: {
+                            fontSize: '15px' // измените размер текста на 16 пикселей
+                        }
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '15px' // измените размер текста на 16 пикселей
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Dates',
+                    color: '#4CAF50',
+                    data: [[${values}]],
+                }]
+              });
+
+            });
+        </script>
+
     </body>
 </html>

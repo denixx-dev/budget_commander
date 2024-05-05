@@ -13,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Controller
 @Slf4j
@@ -45,12 +45,25 @@ public class UserDataController {
         List<Transaction> transactions = transactionRepository.findByBc_User(user);
         System.out.println("Passed getting transactions");
 
+        Collections.sort(transactions, Comparator.comparing(Transaction::getTransactionDate));
+
+        // Подготовка данных для гистограммы
+        List<String> labels = new ArrayList<>();
+        List<Double> values = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            labels.add(transaction.getTransactionDate().toString());
+            values.add(Double.valueOf(transaction.getAmount()));
+        }
+
+//        Collections.sort(labels);
+
+
+        labels.stream().forEach(el -> System.out.println(el));
+
         model.addAttribute("userId", userId);
-        System.out.println(userId);
         model.addAttribute("transactions", transactions);
-
-//        System.out.println("findByUserId method check " + bcUserRepository.findByUserId(this.userId).getUsername());
-
+        model.addAttribute("labels", labels);
+        model.addAttribute("values", values);
         return "userData";
     }
 }

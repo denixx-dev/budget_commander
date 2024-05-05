@@ -16,6 +16,7 @@ public class Transaction {
     private ApplicationUser bc_user;
 
     @Column(name="transaction_date")
+    @Temporal(TemporalType.DATE)
     private Date transactionDate;
 
     @Column(name = "account_bank")
