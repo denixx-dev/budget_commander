@@ -3,6 +3,26 @@
       xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Log in Budget Commander</title>
+        <script
+                src="http://localhost:35729/livereload.js">
+        </script>
+
+        <style>
+            @keyframes fadeInOut {
+                0% {
+                    opacity: 0; /* Начальная прозрачность 0 */
+                }
+                20% {
+                    opacity: 1; /* Бокс становится видимым */
+                }
+                80% {
+                    opacity: 1; /* Бокс остается видимым */
+                }
+                100% {
+                    opacity: 0; /* Бокс становится невидимым */
+                }
+            }
+        </style>
     </head>
     <body style="background: #76b852;
         background: rgb(141,194,111);
@@ -16,11 +36,9 @@
         margin: -20px 0 50px;"
     >
 
-    <h1>Please Log In Budget Commander</h1>
-    <div th:if="${param.error}">
-        Invalid username and password.</div>
-    <div th:if="${param.logout}">
-        You have been logged out.</div>
+    <h1 style = "color: #FFFFFF; margin: 50px auto; font-size: 40px; text-shadow: 1px 1px 2px black;">
+        Please Log In Budget Commander
+    </h1>
     <form id="loginForm" method="post" style=
                 "position: relative;
               z-index: 1;
@@ -53,10 +71,26 @@
         <br>
         <br>
         <div>
-            Doesn't have an account?
+            Don't have an account?
             <a href="/auth/register"> Register</a>
         </div>
     </form>
+    <div id="error_box" style="color: red;
+                margin: 0px auto;
+                background: #FFFFFF;
+                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+                position: absolute;
+                z-index: 1;
+                background: #FFFFFF;
+                max-width: 360px;
+                margin: 0 auto -500px;
+                padding: 30px;
+                text-align: center;
+                display: none;
+                animation: fadeInOut 3s ease-in-out;
+                ">
+        Invalid username or password
+    </div>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
@@ -75,6 +109,8 @@
             })
             .then(response => {
                 if (!response.ok) {
+                    showErrorBox();
+                    setTimeout(hideErrorBox, 3000);
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
@@ -87,6 +123,23 @@
                 console.error('Error:', error); // Обработка ошибки
             });
         });
+
+        function showErrorBox() {
+            var error_box = document.getElementById('error_box');
+            error_box.style.display = 'block';
+            setTimeout(function() {
+                error_box.style.opacity = '1';
+            }, 1); // Задержка перед появлением
+        }
+
+        function hideErrorBox() {
+            var error_box = document.getElementById('error_box');
+            error_box.style.display = 'none';
+            setTimeout(function() {
+                error_box.style.opacity = '0';
+            }, 3000); // Задержка перед появлением
+        }
+
     </script>
     </body>
 </html>

@@ -24,12 +24,24 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public LoginResponseDTO loginUser(@RequestBody RegistrationDTO body, HttpSession session) {
+    public LoginResponseDTO loginUser(@RequestBody RegistrationDTO body, HttpSession session, Model model) {
         System.out.println("in loginUser method");
+
+        Boolean isUserNull = false;
+
         LoginResponseDTO response = authenticationService.loginUser(body.getUsername(), body.getPassword());
 //        System.out.println(response.getUser().getUsername());
+
+        if (response.getUser() == null) {
+            isUserNull = true;
+            System.out.println("isUserNull value: " + isUserNull.toString());
+        }
+
+//        model.addAttribute("isUserNull", isUserNull);
+
         this.username = response.getUser().getUsername();
         session.setAttribute("username", this.username);
+
         return response;
     }
 

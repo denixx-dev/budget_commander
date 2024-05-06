@@ -110,7 +110,7 @@
         font-family: 'Montserrat', sans-serif;
         height: 150vh;
         margin: 10px;
-        text-shadow: 1px 1px 2px black;">
+            text-shadow: 1px 1px 2px black;">
         <br>
         <br>
         <p style = "color: #FFFFFF; margin: 0 auto; font-size: 60px;">Welcome, <span th:text="${session.username}"></span></p>
@@ -176,12 +176,13 @@
             </div>
         </form>
 
+
         <div class="container">
-            <h2 align="center" style = "color: #FFFFFF; margin: 0 auto; font-size: 40px;">Chart of transaction amounts by date</h2>
+            <h2 align="center" style = "color: #FFFFFF; margin: 100px auto; font-size: 40px;">Chart of transaction amounts by date</h2>
             <br>
             <br>
             <div id="container"
-                 style="width: 1000px; height: 800px; margin: 0 auto; text-shadow: 0px 0px 0px"></div>
+                 style="width: 1000px; height: 800px; margin: -100px auto; text-shadow: 0px 0px 0px"></div>
         </div>
         <script
                 src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -226,8 +227,8 @@
                 },
                 tooltip: {
                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">Amount: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
                     footerFormat: '</table>',
                     shared: true,
                     useHTML: true
