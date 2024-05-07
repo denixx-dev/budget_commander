@@ -98,6 +98,14 @@
         margin: 0 auto;
       }
 
+      .button-delete {
+        display: none;
+      }
+
+      .table-row:hover .button-delete {
+        display: block;
+       }
+
     </style>
 </head>
     <body style="background: #76b852;
@@ -127,8 +135,9 @@
                 <th>Project</th>
                 <th>Commentary</th>
                 <th>Status</th>
+                <th style="border-color: #76b852; border-collapse: collapse; background-color: #76b852;"></th>
             </tr>
-            <tr th:each="transaction : ${transactions}" style="text-shadow: 0px 0px 0px black;">
+            <tr th:each="transaction : ${transactions}" style="text-shadow: 0px 0px 0px black;" class="table-row">
 <!--                <td th:text="${transaction.tid}" style="display:none;"></td>-->
                 <td th:text="${transaction.amount}"></td>
                 <td th:text="${transaction.transactionDate}"></td>
@@ -139,10 +148,10 @@
                 <td th:text="${transaction.project}"></td>
                 <td th:text="${transaction.commentary}"></td>
                 <td th:text="${transaction.status}"></td>
-                <td>
+                <td style="border-color: #76b852; border-collapse: collapse; background-color: #76b852;">
                     <form th:action="@{/auth/userData/deleteTransaction}" method="post">
                         <input type="hidden" th:value="${transaction.tid}" name="transactionId"/>
-                        <button type="submit">Delete</button>
+                        <button type="submit" class="button-delete" >Delete</button>
                     </form>
                 </td>
             </tr>
@@ -156,6 +165,7 @@
         <br>
 
         <h3 style = "color: #FFFFFF; margin: 0 auto">Add new transaction</h3>
+        <br>
         <form id = "newTransactionForm" action = "/auth/userData" method = "post" style="margin: 0 auto">
             <input type="hidden" name = "bc_user" th:value="${userId}"/>
             <input type="text" name="amount" placeholder="Amount"/>
@@ -169,25 +179,55 @@
             <input type="text" name="status" placeholder="Status"/>
             <br>
             <br>
-            <div class="button-container">
-                <ul style="list-style-type: none">
-                    <li>
-                        <button id="addTransaction" type="submit" class="button button-left">
-                            Add new transaction
-                        </button>
-                    </li>
-                </ul>
-                <ul style="list-style-type: none">
-                    <li>
-                        <button id="deleteTransaction" type="reset" class="button button-right">
-                            Delete last transaction
-                        </button>
-                    </li>
-                </ul>
+            <br>
+            <div class="button-container" style="text-align: center; width: 25%; margin: 0 auto">
+                <button id="addTransaction" type="submit" class="button button-left">
+                    Add new transaction
+                </button>
             </div>
         </form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let tableRows = document.querySelectorAll('.table-row');
 
+                tableRows.forEach(function(row) {
+                    row.addEventListener("mouseenter", function() {
+                        this.querySelector('.button-delete').style.display = 'block';
+                    });
+
+                    row.addEventListener("mouseleave", function() {
+                        this.querySelector('.button-delete').style.display = 'none';
+                    });
+                });
+        });
+        </script>
+
+<!--        Скрипт для отлова ошибки при вводе неверных данных в форме новой транзакции-->
+        <script>
+            var form = document.getElementById('newTransactionForm');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                // Отправляем запрос на сервер
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', form.action, true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // Если ответ сервера успешный, обновляем страницу
+                        location.reload();
+                    } else {
+                        // Если ответ сервера не успешный, выводим ошибку
+                        throw new Error('Network response was not ok');
+                    }
+                };
+                xhr.send(new FormData(form));
+            });
+        </script>
 
         <div class="container">
             <h2 align="center" style = "color: #FFFFFF; margin: 100px auto; font-size: 40px;">Chart of transaction amounts by date</h2>
