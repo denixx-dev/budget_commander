@@ -129,6 +129,7 @@
                 <th>Status</th>
             </tr>
             <tr th:each="transaction : ${transactions}" style="text-shadow: 0px 0px 0px black;">
+<!--                <td th:text="${transaction.tid}" style="display:none;"></td>-->
                 <td th:text="${transaction.amount}"></td>
                 <td th:text="${transaction.transactionDate}"></td>
                 <td th:text="${transaction.accountBank}"></td>
@@ -138,12 +139,22 @@
                 <td th:text="${transaction.project}"></td>
                 <td th:text="${transaction.commentary}"></td>
                 <td th:text="${transaction.status}"></td>
+                <td>
+                    <form th:action="@{/auth/userData/deleteTransaction}" method="post">
+                        <input type="hidden" th:value="${transaction.tid}" name="transactionId"/>
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         </table>
+
+        <script>
+        </script>
 
         <br>
         <br>
         <br>
+
         <h3 style = "color: #FFFFFF; margin: 0 auto">Add new transaction</h3>
         <form id = "newTransactionForm" action = "/auth/userData" method = "post" style="margin: 0 auto">
             <input type="hidden" name = "bc_user" th:value="${userId}"/>
@@ -175,6 +186,7 @@
                 </ul>
             </div>
         </form>
+
 
 
         <div class="container">

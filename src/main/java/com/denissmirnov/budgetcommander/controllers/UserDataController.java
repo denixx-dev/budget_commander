@@ -55,15 +55,20 @@ public class UserDataController {
             values.add(Double.valueOf(transaction.getAmount()));
         }
 
-//        Collections.sort(labels);
-
-
         labels.stream().forEach(el -> System.out.println(el));
+        System.out.println();
+        transactions.stream().forEach(t -> System.out.println(t.getTid()));
 
         model.addAttribute("userId", userId);
         model.addAttribute("transactions", transactions);
         model.addAttribute("labels", labels);
         model.addAttribute("values", values);
         return "userData";
+    }
+
+    @PostMapping("/deleteTransaction")
+    public String deleteTransaction(@RequestParam Integer transactionId) {
+        transactionRepository.deleteById(transactionId);
+        return "redirect:/auth/userData"; // Перенаправление на страницу с транзакциями
     }
 }
