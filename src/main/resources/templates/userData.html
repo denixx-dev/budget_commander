@@ -151,14 +151,19 @@
                 <td style="border-color: #76b852; border-collapse: collapse; background-color: #76b852;">
                     <form th:action="@{/auth/userData/deleteTransaction}" method="post">
                         <input type="hidden" th:value="${transaction.tid}" name="transactionId"/>
-                        <button type="submit" class="button-delete" >Delete</button>
+                        <div>
+                            <button type="submit" class="button-delete" style="position:absolute;
+                             margin: -10px auto;
+                             padding: 1sp 1vh;
+                             color: red;
+                             font-size: 10px;
+                             text-shadow: 1px 1px 1px black;">
+                                X</button>
+                        </div>
                     </form>
                 </td>
             </tr>
         </table>
-
-        <script>
-        </script>
 
         <br>
         <br>

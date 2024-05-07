@@ -39,6 +39,7 @@ public class BudgetCommanderApplication{
 		};
 	}
 
+
 //	@Override
 //	public void addViewControllers(ViewControllerRegistry registry){
 //		registry.addViewController("/").setViewName("auth/login");
