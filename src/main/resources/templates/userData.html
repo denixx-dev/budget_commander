@@ -27,7 +27,6 @@
             cursor: pointer;
             margin: 0 auto;
             box-shadow: 1px 1px 2px black;
-<!--            text-align: left;-->
         }
 
         #deleteTransaction {
@@ -46,7 +45,6 @@
             margin: 0 auto;
             box-shadow: 1px 1px 2px black;
             right: 20px
-<!--            text-align: right;-->
         }
 
 
@@ -112,7 +110,6 @@
         background: rgb(141,194,111);
         background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
         display: flex;
-<!--        justify-content: center;-->
         align-items: center;
         flex-direction: column;
         font-family: 'Montserrat', sans-serif;
@@ -138,7 +135,6 @@
                 <th style="border-color: #76b852; border-collapse: collapse; background-color: #76b852;"></th>
             </tr>
             <tr th:each="transaction : ${transactions}" style="text-shadow: 0px 0px 0px black;" class="table-row">
-<!--                <td th:text="${transaction.tid}" style="display:none;"></td>-->
                 <td th:text="${transaction.amount}"></td>
                 <td th:text="${transaction.transactionDate}"></td>
                 <td th:text="${transaction.accountBank}"></td>
@@ -241,6 +237,7 @@
             <div id="container"
                  style="width: 1000px; height: 800px; margin: -100px auto; text-shadow: 0px 0px 0px"></div>
         </div>
+
         <script
                 src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->

@@ -17,11 +17,6 @@ public class LoginController implements WebMvcConfigurer {
         return "login";
     }
 
-    @Override
-    public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/");
-    }
 
 
 }

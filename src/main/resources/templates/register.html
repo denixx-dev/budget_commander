@@ -92,52 +92,25 @@
             Error: this username already exists or invalid username/password
         </div>
 
-        <script>
-            document.getElementById('registerForm').addEventListener('submit', function(event) {
-                event.preventDefault();
+        <div id="success_box" style="color: green;
+                margin: 0px auto;
+                background: #FFFFFF;
+                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+                position: absolute;
+                z-index: 1;
+                background: #FFFFFF;
+                max-width: 360px;
+                margin: 0 auto -500px;
+                padding: 30px;
+                text-align: center;
+                display: none;
+                animation: fadeInOut 3s ease-in-out;
+                ">
+            Account was successfully created
+        </div>
 
-                const formData = new FormData(event.target);
-                const jsonData = {};
-                formData.forEach((value, key) => { jsonData[key] = value });
+        <script th:src="@{../static/js/collectDataForRegistration.js}">
 
-                fetch('/auth/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(jsonData)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        showErrorBox();
-                        setTimeout(hideErrorBox, 3000);
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data); // Обработка успешного ответа
-                })
-                .catch(error => {
-                    console.error('Error:', error); // Обработка ошибки
-                });
-            });
-
-            function showErrorBox() {
-                var error_box = document.getElementById('error_box');
-                error_box.style.display = 'block';
-                setTimeout(function() {
-                    error_box.style.opacity = '1';
-                }, 1); // Задержка перед появлением
-            }
-
-            function hideErrorBox() {
-                var error_box = document.getElementById('error_box');
-                error_box.style.display = 'none';
-                setTimeout(function() {
-                    error_box.style.opacity = '0';
-                }, 3000); // Задержка перед появлением
-            }
         </script>
     </body>
 </html>

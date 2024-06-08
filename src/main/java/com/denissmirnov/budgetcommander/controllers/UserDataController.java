@@ -32,18 +32,18 @@ public class UserDataController {
     @GetMapping
     public String showUserDataPage(HttpSession session, Model model){
         String username = (String) session.getAttribute("username");
-        System.out.println("Passed getting username");
-        System.out.println(username);
+//        System.out.println("Passed getting username");
+//        System.out.println(username);
 
         ApplicationUser user = bcUserRepository.findByUsername(username);
-        System.out.println("Passed getting user");
+//        System.out.println("Passed getting user");
 
         this.userId = user.getUserId();
-        System.out.println("Passed getting user id");
-        System.out.println(userId);
+//        System.out.println("Passed getting user id");
+//        System.out.println(userId);
 
         List<Transaction> transactions = transactionRepository.findByBc_User(user);
-        System.out.println("Passed getting transactions");
+//        System.out.println("Passed getting transactions");
 
         Collections.sort(transactions, Comparator.comparing(Transaction::getTransactionDate));
 
@@ -55,9 +55,9 @@ public class UserDataController {
             values.add(Double.valueOf(transaction.getAmount()));
         }
 
-        labels.stream().forEach(el -> System.out.println(el));
-        System.out.println();
-        transactions.stream().forEach(t -> System.out.println(t.getTid()));
+//        labels.stream().forEach(el -> System.out.println(el));
+//        System.out.println();
+//        transactions.stream().forEach(t -> System.out.println(t.getTid()));
 
         model.addAttribute("userId", userId);
         model.addAttribute("transactions", transactions);
